@@ -297,7 +297,7 @@ def pull(
     move_arm_distanced(
         pose, mid_distance, frame_name, follow_arm=follow_arm, **keywords_in
     )  # moving in
-    set_gripper(False)  # grab
+    set_gripper(False, max_vel=0.75)  # grab
     pull_start = frame_transformer.get_hand_position_in_frame(
         frame_name, in_common_pose=True
     )
@@ -825,10 +825,11 @@ def turn_light_switch(
         "timeout": timeout,
     }
 
-    move_arm_distanced(start_pose, 0.05, frame_name) # before handle
-    set_gripper(0.4)
+    move_arm_distanced(start_pose, 0.045, frame_name) # before handle
+    # set_gripper(0.4)
 
-    set_gripper(False)
+    set_gripper(False, max_vel=0.75)
+    time.sleep(1)
 
     # move_arm_distanced(start_pose, -0.01, frame_name, **keywords)  # pushing
     # set_gripper(False)
